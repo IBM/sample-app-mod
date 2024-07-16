@@ -13,6 +13,7 @@ import java.lang.management.ManagementFactory;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import java.net.URI;
 import java.net.URL;
 import java.util.Hashtable;
 import java.util.logging.Level;
@@ -148,7 +149,7 @@ public class WeatherServlet extends HttpServlet {
 		URL obj = null;
 		HttpURLConnection con = null;
 		try {
-			obj = new URL(resturl);
+			obj = URI.create(resturl).toURL();
 			con = (HttpURLConnection) obj.openConnection();
 			con.setRequestMethod("GET");
 		} catch (MalformedURLException e1) {

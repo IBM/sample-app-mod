@@ -59,7 +59,12 @@ public class AvailabilityCheckerServlet extends HttpServlet {
 			try {
 				t1.start();
 				t1.join();
-				t1.stop();
+				/*
+				 * `Thread.stop()` always throws a `new UnsupportedOperationException()` in Java 21+.
+				 * For detailed migration instructions see the migration guide available at
+				 * https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/doc-files/threadPrimitiveDeprecation.html
+				 */
+				throw new UnsupportedOperationException();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
