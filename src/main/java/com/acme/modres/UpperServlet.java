@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ibm.websphere.servlet.response.ResponseUtils;
-
 @WebServlet("/resorts/upper")
 public class UpperServlet extends HttpServlet {
 
@@ -26,9 +24,30 @@ public class UpperServlet extends HttpServlet {
 		}
 		
         String newStr = originalStr.toUpperCase();
-        newStr = ResponseUtils.encodeDataString(newStr);
+        newStr = escapeHTML(newStr);
         
 	    PrintWriter out = response.getWriter();  
 	    out.print("<br/><b>capitalized input " + newStr + "</b>");  
 	}
+	
+	public String escapeHTML(String input) {
+    if (input == null) {
+        return null;
+    }
+
+    // Replace special characters with HTML entities
+    String escapedInput = input
+            .replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace("\"", "&quot;")
+            .replace("'", "&#39;")
+            .replace("(", "&#40;")
+            .replace(")", "&#41;")
+            .replace("+", "&#43;")
+            .replace("%", "&#37;")
+            .replace(";", "&#59;");
+
+    return escapedInput;
+}
 }
