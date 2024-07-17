@@ -1,4 +1,4 @@
-# ModResorts Demo Application
+# ModResorts Demo Application  
 
 ## Overview
 ModResorts (as per the `main` branch) is a IBM WebSphere Application Server web application. It is a simple application that can be used to demonstrate modernization of a IBM WebSphere Application Server to Liberty, as well as Java version upgrade scenarios.
