@@ -12,6 +12,7 @@ dependencies {
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '5.11.0'
     testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '5.8.0'
     testImplementation group: 'org.springframework', name: 'spring-test', version: '5.3.20'
+    testImplementation group: 'org.apache.httpcomponents.client5', name: 'httpclient5', version: '5.3.1'
     compileOnly group: 'javax', name: 'javaee-api', version: '7.0'
     compileOnly group: 'com.ibm.websphere.appserver', name: 'was_public', version: '9.0.0'
 }

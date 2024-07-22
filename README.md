@@ -66,6 +66,7 @@ mvn liberty:dev
 ```
 mvn io.openliberty.tools:liberty-maven-plugin:3.10.2:dev
 ```
+- Run tests by pressing the `enter/return` key from the command-line session where you started dev mode
 - Build and drop the WAR file into Liberty installation.
 
 For more on Liberty Dev Tools please refer to [Develop with Liberty Tools](https://openliberty.io/docs/latest/develop-liberty-tools.html)
