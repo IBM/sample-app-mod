@@ -56,6 +56,11 @@
       <version>5.3.20</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.acme.common</groupId>
+      <artifactId>env-config</artifactId>
+      <version>1.7</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
