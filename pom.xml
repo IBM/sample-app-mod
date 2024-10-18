@@ -59,7 +59,7 @@
     <dependency>
       <groupId>com.acme.common</groupId>
       <artifactId>env-config</artifactId>
-      <version>1.7</version>
+      <version>1.5</version>
     </dependency>
   </dependencies>
   <build>
