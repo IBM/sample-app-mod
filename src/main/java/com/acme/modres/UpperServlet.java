@@ -25,10 +25,10 @@ public class UpperServlet extends HttpServlet {
 			originalStr = "";
 		}
 		
-        String newStr = originalStr.toUpperCase();
-        newStr = ResponseUtils.encodeDataString(newStr);
+		String newStr = originalStr.toUpperCase();
+		newStr = ResponseUtils.encodeDataString(newStr);
         
-	    PrintWriter out = response.getWriter();  
-	    out.print("<br/><b>capitalized input " + newStr + "</b>");  
+		PrintWriter out = response.getWriter();  
+		out.print("<br/><b>upper case input " + newStr + "</b>");  
 	}
 }
