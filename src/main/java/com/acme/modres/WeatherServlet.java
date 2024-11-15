@@ -258,7 +258,7 @@ public class WeatherServlet extends HttpServlet {
         serverEnv += com.ibm.websphere.runtime.ServerName.getFullName();
 
         return serverEnv;
-    }
+  }
 
 	private InitialContext setInitialContextProps() {
 
