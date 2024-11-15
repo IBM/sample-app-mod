@@ -55,16 +55,17 @@ public class AvailabilityCheckerServlet extends HttpServlet {
 		}
 		
 		if(statusCode == 200) {
-			Thread t1 = new Thread(new DateChecker(reservationCheckerData));
+			DateChecker dateChecker = new DateChecker(reservationCheckerData);
+			Thread t1 = new Thread(dateChecker);
+			t1.start();
 			try {
-				t1.start();
-				t1.join();
-				t1.stop();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				t1.join(1000);
+			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
+			if (t1.isAlive()) {
+				t1.stop();
+			}
 			if (!reservationCheckerData.isAvailible()) {
 				statusCode = 201;
 			}
