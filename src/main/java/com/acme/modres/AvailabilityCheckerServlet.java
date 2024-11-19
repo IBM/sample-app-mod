@@ -64,7 +64,7 @@ public class AvailabilityCheckerServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			if (t1.isAlive()) {
-				t1.stop();
+				dateChecker.stop();
 			}
 			if (!reservationCheckerData.isAvailible()) {
 				statusCode = 201;

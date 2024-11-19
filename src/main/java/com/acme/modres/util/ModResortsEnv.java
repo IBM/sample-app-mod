@@ -13,13 +13,9 @@ import java.util.logging.Logger;
 
 import com.acme.common.EnvConfig;
 
-import sun.misc.Unsafe;
-
 
 public class ModResortsEnv {
-  static final Unsafe myUnsafe = myGetUnsafe();
   private static final Logger logger = Logger.getLogger(ModResortsEnv.class.getName());
-
   private EnvConfig envConfig;
 
   public ModResortsEnv() {
@@ -49,30 +45,15 @@ public class ModResortsEnv {
     }
   }
 
-  private String getAdminEndpoint() {
+  public String getAdminEndpoint() {
     try {
       Field f = EnvConfig.class.getDeclaredField("adminApiEndpoint");
-      long offset = myUnsafe.objectFieldOffset(f);
-      return (String)myUnsafe.getObject(envConfig, offset);
-    } catch (NoSuchFieldException | SecurityException e) {
+      f.setAccessible(true);
+      return (String) f.get(envConfig);
+    } catch (NoSuchFieldException | IllegalAccessException e) {
       e.printStackTrace();
     }
     return null;
-  }
-
-  private static Unsafe myGetUnsafe() {
-    try {
-        Field f = Unsafe.class.getDeclaredField("theUnsafe");
-        f.setAccessible(true);
-        Unsafe unsafe = (Unsafe) f.get(null);
-        return unsafe;
-    } catch (NoSuchFieldException ex) {
-      return null;
-    } catch (IllegalArgumentException ex) {
-      return null;
-    } catch (IllegalAccessException ex) {
-      return null;
-    }
   }
 
   // Test driver for class

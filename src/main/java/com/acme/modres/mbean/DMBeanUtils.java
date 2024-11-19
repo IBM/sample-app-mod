@@ -25,8 +25,14 @@ public final class DMBeanUtils {
 				String type = opMetadata.getType();
 				int impact = opMetadata.getImpact();
 
-				MBeanOperationInfo opInfo = new MBeanOperationInfo(name, desc, /* signature */ null, type, impact, /* descriptor */ null);
-				ops[i++] = opInfo;
+				try {
+					MBeanOperationInfo opInfo = new MBeanOperationInfo(name, desc, /* signature */ null, type, impact, /* descriptor */ null);
+					ops[i++] = opInfo;
+				} catch (IllegalArgumentException e) {
+					logger.log(Level.WARNING, "Impact value is invalid. Using MBeanOperationInfo.UNKNOWN as the value for the impact field.");
+					MBeanOperationInfo opInfo = new MBeanOperationInfo(name, desc, /* signature */ null, type, MBeanOperationInfo.UNKNOWN, /* descriptor */ null);
+					ops[i++] = opInfo;
+				}
 			}
 		}
 		
