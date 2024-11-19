@@ -59,8 +59,13 @@
     <dependency>
       <groupId>com.acme.common</groupId>
       <artifactId>env-config</artifactId>
-      <version>1.5</version>
+      <version>1.6</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+      <version>1.12.0</version>
+    </dependency>  
   </dependencies>
   <build>
     <plugins>
