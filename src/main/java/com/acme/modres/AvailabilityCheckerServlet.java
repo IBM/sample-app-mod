@@ -87,7 +87,7 @@ public class AvailabilityCheckerServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	protected int exportRevervations(String selectedDateStr) {
+	protected int exportReservations(String selectedDateStr) {
 		File fileToZip = IOUtils.getFileFromRelativePath("reservations.json");
 		String userDirectory = System.getProperty("user.home");
 		String zipPath = userDirectory + "/reservations.zip";
