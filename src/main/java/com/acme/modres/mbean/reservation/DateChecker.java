@@ -1,32 +1,36 @@
 package com.acme.modres.mbean.reservation;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import com.acme.modres.Constants;
-
 public class DateChecker implements Runnable {
-    ReservationCheckerData data;
+	ReservationCheckerData data;
+	List<Reservation> reservations;
 
-    public DateChecker(ReservationCheckerData data) {
-        this.data = data;
-    }
+	public DateChecker(ReservationCheckerData data) {
+		this.data = data;
+		this.reservations = data.getReservationList().getReservations();
+	}
 
-    public void run() {
-        data.setAvailablility(true);
-		for(Reservation resveration: data.getReservationList().getReservations()) {
+	public void run() {
+		for (int i = 0; i < reservations.size(); i++) {
+			Reservation reservation = reservations.get(i);
+			Date selectedDate = data.getSelectedDate();
+
 			try {
-                Date selectedDate = data.getSelectedDate();
-				Date fromDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(resveration.getFromDate());
-				Date toDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(resveration.getToDate());
-
+				Date fromDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(reservation.getFromDate());
+				Date toDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(reservation.getToDate());
 				if (selectedDate.after(fromDate) && selectedDate.before(toDate)) {
-                    data.setAvailablility(false);
-                    break;
+					data.setAvailablility(false);
+					break;
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (ParseException ex) {
+				ex.printStackTrace();
 			}
 		}
+		data.setAvailablility(true);
 	}
 }
