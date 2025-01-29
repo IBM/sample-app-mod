@@ -57,33 +57,30 @@ public class AvailabilityCheckerServlet extends HttpServlet {
 			statusCode = 500;
 			reservationCheckerData.setAvailablility(false);
 		}
-		else
-		{
-		List<Reservation> reservations = reservationCheckerData.getReservationList().getReservations();
-		boolean isAvailible=true;
-
-		for (Reservation reservation : reservations) {
-			try {
-				Date fromDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(reservation.getFromDate());
-				Date toDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(reservation.getToDate());
-				Date selectedDate = reservationCheckerData.getSelectedDate();
+		else{
+			List<Reservation> reservations = reservationCheckerData.getReservationList().getReservations();
+			boolean isAvailible=true;
+			for (Reservation reservation : reservations) {
+				try {
+					Date fromDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(reservation.getFromDate());
+					Date toDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(reservation.getToDate());
+					Date selectedDate = reservationCheckerData.getSelectedDate();
 	
-				if (selectedDate.after(fromDate) && selectedDate.before(toDate)) {
-					isAvailible = false;
-					break;
-				}
-			} catch (ParseException ex) {
+					if (selectedDate.after(fromDate) && selectedDate.before(toDate)) {
+						isAvailible = false;
+						break;
+					}
+				} catch (ParseException ex) {
 					ex.printStackTrace();
+				}
 			}
-		}
 	
-		reservationCheckerData.setAvailablility(isAvailible);
+			reservationCheckerData.setAvailablility(isAvailible);
 	
-		// Adjust the status code based on availability
-		if (!isAvailible) {
-			statusCode = 201;
-		}
-
+			// Adjust the status code based on availability
+			if (!isAvailible) {
+				statusCode = 201;
+			}
 		}
 	
 		// Send the response
