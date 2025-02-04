@@ -15,7 +15,6 @@ import com.acme.common.EnvConfig;
 
 import sun.misc.Unsafe;
 
-
 public class ModResortsEnv {
   static final Unsafe myUnsafe = myGetUnsafe();
   private static final Logger logger = Logger.getLogger(ModResortsEnv.class.getName());
@@ -38,7 +37,7 @@ public class ModResortsEnv {
     HttpURLConnection con = null;
     try {
       con = (HttpURLConnection) url.openConnection();
-      HttpURLConnection http = (HttpURLConnection)con;
+      HttpURLConnection http = (HttpURLConnection) con;
       http.setRequestMethod("POST");
       http.setDoOutput(true);
       BufferedWriter httpRequestBodyWriter = new BufferedWriter(new OutputStreamWriter(con.getOutputStream(), "UTF-8"));
@@ -53,7 +52,7 @@ public class ModResortsEnv {
     try {
       Field f = EnvConfig.class.getDeclaredField("adminApiEndpoint");
       long offset = myUnsafe.objectFieldOffset(f);
-      return (String)myUnsafe.getObject(envConfig, offset);
+      return (String) myUnsafe.getObject(envConfig, offset);
     } catch (NoSuchFieldException | SecurityException e) {
       e.printStackTrace();
     }
@@ -62,10 +61,10 @@ public class ModResortsEnv {
 
   private static Unsafe myGetUnsafe() {
     try {
-        Field f = Unsafe.class.getDeclaredField("theUnsafe");
-        f.setAccessible(true);
-        Unsafe unsafe = (Unsafe) f.get(null);
-        return unsafe;
+      Field f = Unsafe.class.getDeclaredField("theUnsafe");
+      f.setAccessible(true);
+      Unsafe unsafe = (Unsafe) f.get(null);
+      return unsafe;
     } catch (NoSuchFieldException ex) {
       return null;
     } catch (IllegalArgumentException ex) {
