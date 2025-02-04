@@ -10,7 +10,10 @@ import java.io.PrintWriter;
 import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.acme.modres.mbean.IOUtils;
 import com.acme.modres.mbean.reservation.DateChecker;
 import com.acme.modres.mbean.reservation.ReservationCheckerData;
+import com.acme.modres.mbean.reservation.Reservation;
+
 import com.acme.modres.util.ZipValidator;
 
 @WebServlet({ "/resorts/availability" })
@@ -40,8 +45,7 @@ public class AvailabilityCheckerServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws IOException, ServletException {
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
 
 		String methodName = "doGet";
 		logger.entering(AvailabilityCheckerServlet.class.getName(), methodName);
@@ -53,29 +57,40 @@ public class AvailabilityCheckerServlet extends HttpServlet {
 			statusCode = 500;
 			reservationCheckerData.setAvailablility(false);
 		}
-		
-		if(statusCode == 200) {
-			Thread t1 = new Thread(new DateChecker(reservationCheckerData));
-			try {
-				t1.start();
-				t1.join();
-				t1.stop();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		else{
+			List<Reservation> reservations = reservationCheckerData.getReservationList().getReservations();
+			boolean isAvailible=true;
+			for (Reservation reservation : reservations) {
+				try {
+					Date fromDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(reservation.getFromDate());
+					Date toDate = new SimpleDateFormat(Constants.DATA_FORMAT).parse(reservation.getToDate());
+					Date selectedDate = reservationCheckerData.getSelectedDate();
+	
+					if (selectedDate.after(fromDate) && selectedDate.before(toDate)) {
+						isAvailible = false;
+						break;
+					}
+				} catch (ParseException ex) {
+					ex.printStackTrace();
+				}
 			}
-
-			if (!reservationCheckerData.isAvailible()) {
+	
+			reservationCheckerData.setAvailablility(isAvailible);
+	
+			// Adjust the status code based on availability
+			if (!isAvailible) {
 				statusCode = 201;
 			}
 		}
-
+	
+		// Send the response
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
-		out.print("{\"availability\": \""+String.valueOf(reservationCheckerData.isAvailible())+"\"}");
+		out.print("{\"availability\": \"" + String.valueOf(reservationCheckerData.isAvailible()) + "\"}");
 		response.setStatus(statusCode);
 	}
+
 
 	/**
 	 * Returns the weather information for a given city
