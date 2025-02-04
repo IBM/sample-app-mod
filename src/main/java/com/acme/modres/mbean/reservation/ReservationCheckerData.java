@@ -8,7 +8,7 @@ import com.acme.modres.Constants;
 public class ReservationCheckerData {
     private ReservationList reservations;
 	private Date selectedDate;
-	private boolean available; // changed from Boolean to boolean
+	private boolean available; 
 
     public ReservationCheckerData(ReservationList reservations) {
         this.reservations = reservations;
@@ -36,7 +36,7 @@ public class ReservationCheckerData {
         return available;
     }
 
-    public void setAvailablility(boolean available) { //fix parameter type
+    public void setAvailablility(boolean available) { 
         this.available = available;
     }
 }
