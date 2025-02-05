@@ -1,6 +1,5 @@
 package com.acme.modres;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,108 +24,108 @@ import com.acme.modres.util.ZipValidator;
 
 @WebServlet({ "/resorts/availability" })
 public class AvailabilityCheckerServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	private static final Logger logger = Logger.getLogger(AvailabilityCheckerServlet.class.getName());
+  private static final Logger logger = Logger.getLogger(AvailabilityCheckerServlet.class.getName());
 
-	private static InitialContext context;
+  private static InitialContext context;
 
-	private ReservationCheckerData reservationCheckerData;
+  private ReservationCheckerData reservationCheckerData;
 
-	@Override
-	public void init() {
-		// load reserved dates
-		this.reservationCheckerData = new ReservationCheckerData(IOUtils.getReservationListFromConfig());
-	}
+  @Override
+  public void init() {
+    // load reserved dates
+    this.reservationCheckerData = new ReservationCheckerData(IOUtils.getReservationListFromConfig());
+  }
 
-	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws IOException, ServletException {
+  @Override
+  protected void doGet(HttpServletRequest request,
+      HttpServletResponse response) throws IOException, ServletException {
 
-		String methodName = "doGet";
-		logger.entering(AvailabilityCheckerServlet.class.getName(), methodName);
-		int statusCode = 200;
+    String methodName = "doGet";
+    logger.entering(AvailabilityCheckerServlet.class.getName(), methodName);
+    int statusCode = 200;
 
-		String selectedDateStr = request.getParameter("date");
-		boolean parsedDate = reservationCheckerData.setSelectedDate(selectedDateStr);
-		if (!parsedDate || reservationCheckerData.getReservationList() == null) {
-			statusCode = 500;
-			reservationCheckerData.setAvailablility(false);
-		}
-		
-		if(statusCode == 200) {
-			DateChecker dateChecker = new DateChecker(reservationCheckerData);
-			Thread t1 = new Thread(dateChecker);
-			t1.start();
-			try {
-				t1.join(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			if (t1.isAlive()) {
-				dateChecker.stop();
-			}
-			if (!reservationCheckerData.isAvailible()) {
-				statusCode = 201;
-			}
-		}
+    String selectedDateStr = request.getParameter("date");
+    boolean parsedDate = reservationCheckerData.setSelectedDate(selectedDateStr);
+    if (!parsedDate || reservationCheckerData.getReservationList() == null) {
+      statusCode = 500;
+      reservationCheckerData.setAvailablility(false);
+    }
 
-		PrintWriter out = response.getWriter();
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		out.print("{\"availability\": \""+String.valueOf(reservationCheckerData.isAvailible())+"\"}");
-		response.setStatus(statusCode);
-	}
+    if (statusCode == 200) {
+      DateChecker dateChecker = new DateChecker(reservationCheckerData);
+      Thread t1 = new Thread(dateChecker);
+      t1.start();
+      try {
+        t1.join(1000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      if (t1.isAlive()) {
+        dateChecker.stop();
+      }
+      if (!reservationCheckerData.isAvailible()) {
+        statusCode = 201;
+      }
+    }
 
-	/**
-	 * Returns the weather information for a given city
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+    PrintWriter out = response.getWriter();
+    response.setContentType("application/json");
+    response.setCharacterEncoding("UTF-8");
+    out.print("{\"availability\": \"" + String.valueOf(reservationCheckerData.isAvailible()) + "\"}");
+    response.setStatus(statusCode);
+  }
 
-		doGet(request, response);
-	}
+  /**
+   * Returns the weather information for a given city
+   */
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
 
-	protected int exportRevervations(String selectedDateStr) {
-		File fileToZip = IOUtils.getFileFromRelativePath("reservations.json");
-		String userDirectory = System.getProperty("user.home");
-		String zipPath = userDirectory + "/reservations.zip";
-		
-		FileOutputStream fos;
-		try {
-			fos = new FileOutputStream(zipPath);
-			ZipOutputStream zipOut = new ZipOutputStream(fos);
+    doGet(request, response);
+  }
 
-			FileInputStream fis = new FileInputStream(fileToZip);
-			ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
-			zipOut.putNextEntry(zipEntry);
+  protected int exportRevervations(String selectedDateStr) {
+    File fileToZip = IOUtils.getFileFromRelativePath("reservations.json");
+    String userDirectory = System.getProperty("user.home");
+    String zipPath = userDirectory + "/reservations.zip";
 
-			byte[] bytes = new byte[1024];
-			int length;
-			while((length = fis.read(bytes)) >= 0) {
-				zipOut.write(bytes, 0, length);
-			}
-			fis.close();
+    FileOutputStream fos;
+    try {
+      fos = new FileOutputStream(zipPath);
+      ZipOutputStream zipOut = new ZipOutputStream(fos);
 
-			zipOut.close();
-			fos.close();
+      FileInputStream fis = new FileInputStream(fileToZip);
+      ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
+      zipOut.putNextEntry(zipEntry);
 
-			// verify zip
-			ZipValidator zipValidator = new ZipValidator(new File(zipPath));
-			if(zipValidator.isValid()) {
-				return 0;
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return -1;
-	}
+      byte[] bytes = new byte[1024];
+      int length;
+      while ((length = fis.read(bytes)) >= 0) {
+        zipOut.write(bytes, 0, length);
+      }
+      fis.close();
+
+      zipOut.close();
+      fos.close();
+
+      // verify zip
+      ZipValidator zipValidator = new ZipValidator(new File(zipPath));
+      if (zipValidator.isValid()) {
+        return 0;
+      }
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (Throwable e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return -1;
+  }
 
 }
