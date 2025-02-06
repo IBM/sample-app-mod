@@ -7,26 +7,25 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
 import java.util.zip.ZipFile;
 
-
 public class ZipValidator extends ZipFile {
-    
-    public ZipValidator(File file) throws ZipException, IOException {
-        super(file);
-        this.file = file;
+
+  public ZipValidator(File file) throws ZipException, IOException {
+    super(file);
+    this.file = file;
+  }
+
+  private File file;
+
+  public boolean isValid() throws Throwable {
+    if (file.exists()) {
+      ZipValidator zipFile = new ZipValidator(file);
+      Enumeration<? extends ZipEntry> entries = zipFile.entries();
+      if (!entries.hasMoreElements()) {
+        return true;
+      }
+      zipFile.close();
     }
+    return false;
+  }
 
-    private File file;
-
-    public boolean isValid() throws Throwable {
-        if (file.exists()){
-            ZipValidator zipFile = new ZipValidator(file);
-            Enumeration<? extends ZipEntry> entries = zipFile.entries();
-            if(!entries.hasMoreElements()) {
-                return true;
-            }
-            zipFile.close();
-        }
-		return false;
-	}
-    
 }
