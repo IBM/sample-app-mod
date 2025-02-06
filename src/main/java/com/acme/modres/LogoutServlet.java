@@ -9,21 +9,21 @@ import com.ibm.websphere.security.WSSecurityHelper;
 
 import java.io.IOException;
 
-@WebServlet({"/logout"})
+@WebServlet({ "/logout" })
 public class LogoutServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @Override
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws IOException {
+  @Override
+  protected void doGet(HttpServletRequest request,
+      HttpServletResponse response) throws IOException {
 
-        try {
-            WSSecurityHelper.revokeSSOCookies(request, response);
-        } catch (Exception e) {
-            System.err.println("[ERROR] Error logging out");
-            e.printStackTrace();
-        }
-
-        response.sendRedirect("login.jsp");
+    try {
+      WSSecurityHelper.revokeSSOCookies(request, response);
+    } catch (Exception e) {
+      System.err.println("[ERROR] Error logging out");
+      e.printStackTrace();
     }
+
+    response.sendRedirect("login.jsp");
+  }
 }
