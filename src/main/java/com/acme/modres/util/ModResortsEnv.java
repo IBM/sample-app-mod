@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 
 import com.acme.common.EnvConfig;
 
-
 public class ModResortsEnv {
   private static final Logger logger = Logger.getLogger(ModResortsEnv.class.getName());
   private EnvConfig envConfig;
@@ -34,7 +33,7 @@ public class ModResortsEnv {
     HttpURLConnection con = null;
     try {
       con = (HttpURLConnection) url.openConnection();
-      HttpURLConnection http = (HttpURLConnection)con;
+      HttpURLConnection http = (HttpURLConnection) con;
       http.setRequestMethod("POST");
       http.setDoOutput(true);
       BufferedWriter httpRequestBodyWriter = new BufferedWriter(new OutputStreamWriter(con.getOutputStream(), "UTF-8"));
