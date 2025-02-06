@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/resorts/welcome")
 public class WelcomeServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/plain");
-		
-		PrintWriter out = response.getWriter(); 
-        out.println(" Enjoy!");
-	}
+  @Override
+  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    response.setContentType("text/plain");
+
+    PrintWriter out = response.getWriter();
+    out.println(" Enjoy!");
+  }
 }
