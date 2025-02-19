@@ -131,6 +131,23 @@ a.reviews-link:hover{
   padding: 0;
 }
 
+#x {
+  font-family: inherit;
+  letter-spacing: 0.02rem;
+  cursor: pointer;
+  background: transparent;
+  border: 0.2rem solid currentColor;
+  padding: 0.5rem 0.6rem;
+  font-size: 1em;
+  color: #ffffff;
+  position: fixed;
+  transition: color 0.3s;
+  z-index: 1;
+  top: 1em;
+  right: 1em;
+  border-radius: 5px;
+}
+
 .sub-nav {
   display: flex;
   justify-content: flex-end;
@@ -239,9 +256,8 @@ a.reviews-link:hover{
 }
 
 .reviews-container {
-  display: flex;
-  align-content: flex-start;
-  flex-wrap: wrap;
+  display: grid;
+  place-items: center;
   position: absolute;
   top: 125px;
   left: 0;
@@ -256,11 +272,19 @@ a.reviews-link:hover{
 }
 
 .reviews-scroller {
-  height: 400px;
-  width:120px;
-  border:1px solid #ccc;
+  display: grid;
+  place-items: center;
+  height: 500px;
+  width:400px;
+  border:0px;
   font:16px/26px Georgia, Garamond, Serif;
   overflow:auto;
+}
+
+.review {
+  border-bottom-style: solid;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .is-selected {

@@ -126,6 +126,10 @@ function openReviews() {
     //reviewsContainer.classList.remove("is-selected");
 }
 
+function closeReviews() {
+    reviewsContainer.classList.remove("is-selected-reviews");
+}
+
 function loadOfflineJSON(callback) {
     var chosenCity = (selectCity && selectCity.value) ? selectCity.value: '';
     var xobj = new XMLHttpRequest();
