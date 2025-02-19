@@ -121,7 +121,9 @@ selectCity.addEventListener("change", function(e){
 var reviewsContainer = document.querySelector(".js-reviews-container");
 
 function openReviews() {
-    reviewsContainer.classList.remove("is-selected");
+    //alert("here1");
+    reviewsContainer.classList.add("is-selected-reviews");
+    //reviewsContainer.classList.remove("is-selected");
 }
 
 function loadOfflineJSON(callback) {

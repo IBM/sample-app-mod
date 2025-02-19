@@ -270,6 +270,13 @@ a.reviews-link:hover{
   transition: all 1s ease-in-out;
 }
 
+.is-selected-reviews {
+  opacity: 1;
+  left: 585px;
+  transform: scaleX(1);
+  transition: all 1s ease-in-out;
+}
+
 .languages-link {
   vertical-align: top;
   margin-left: 30px;
