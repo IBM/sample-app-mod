@@ -118,6 +118,12 @@ selectCity.addEventListener("change", function(e){
 });
 
 
+var reviewsContainer = document.querySelector(".js-reviews-container");
+
+function openReviews() {
+    reviewsContainer.classList.remove("is-selected");
+}
+
 function loadOfflineJSON(callback) {
     var chosenCity = (selectCity && selectCity.value) ? selectCity.value: '';
     var xobj = new XMLHttpRequest();

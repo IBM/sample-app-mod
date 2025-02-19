@@ -19,6 +19,20 @@ body {
   font-weight: 200;
 }
 
+a.reviews-link {
+  font-size: 16px;
+  text-decoration: none;
+  color: #fff;
+  text-align: right;
+
+}
+a.reviews-link:hover{
+  font-size: 16px;
+  text-decoration: underline;
+  color: #fff;
+  text-align: right;
+}
+
 .h1__city {
   width: 100%;
   font-size: 58px;
@@ -222,6 +236,31 @@ body {
   opacity: 0;
   transform: scale(.8);
   transition: all 1s ease-in-out;
+}
+
+.reviews-container {
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 125px;
+  left: 0;
+  width: 530px;
+  min-height: 630px;
+  padding: 40px;
+  color: #fff;
+  background: rgba(0, 0, 0, .75);
+  opacity: 0;
+  transform: scale(.8);
+  transition: all 1s ease-in-out;
+}
+
+.reviews-scroller {
+  height: 400px;
+  width:120px;
+  border:1px solid #ccc;
+  font:16px/26px Georgia, Garamond, Serif;
+  overflow:auto;
 }
 
 .is-selected {
