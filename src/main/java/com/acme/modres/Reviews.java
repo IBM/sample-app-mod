@@ -10,8 +10,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/**
+ * This class provides a REST API for accessing customer reviews.
+ * 
+ * @author Watson Code Assistant
+ */
 @Path("/v1")
 public class Reviews {
+
+  /**
+   * Returns a list of customer reviews in JSON format.
+   * 
+   * @return Response containing a JSON array of reviews
+   */
   @GET
   @Path("/reviews")
   @Produces(MediaType.APPLICATION_JSON)
