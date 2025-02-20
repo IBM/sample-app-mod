@@ -256,8 +256,9 @@ a.reviews-link:hover{
 }
 
 .reviews-container {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
   position: absolute;
   top: 125px;
   left: 0;
@@ -273,8 +274,9 @@ a.reviews-link:hover{
 
 .reviews-scroller {
   display: grid;
-  place-items: center;
-  height: 500px;
+  place-items: left;
+  padding-bottom:100px;
+  height: 545px;
   width:400px;
   border:0px;
   font:16px/26px Georgia, Garamond, Serif;
@@ -285,6 +287,13 @@ a.reviews-link:hover{
   border-bottom-style: solid;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.reviews-link-container {
+  width: 100%;
+  padding-top: 30px;
+  display: grid;
+  place-items: center;
 }
 
 .is-selected {

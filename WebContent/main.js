@@ -121,13 +121,56 @@ selectCity.addEventListener("change", function(e){
 var reviewsContainer = document.querySelector(".js-reviews-container");
 
 function openReviews() {
-    //alert("here1");
     reviewsContainer.classList.add("is-selected-reviews");
-    //reviewsContainer.classList.remove("is-selected");
+
+    var getUrl = window.location;
+    var request = new XMLHttpRequest();
+    request.open('GET', getUrl.protocol+ "//" + getUrl.hostname + ":" + getUrl.port + "/resorts/api/v1/reviews", true);
+    request.onload = function() {
+        try {
+            console.log("get reviews server request status: " + request.status);
+            if (request.status == 200){
+                var data = JSON.parse(this.response);
+                setReviewsData(data);
+            }
+        } catch (e) { console.log("Failed to get data from server");}
+    };
+    request.send();
+}
+
+function setReviewsData(data) {
+    var reviews = [];
+    var chosenCity = (selectCity && selectCity.value) ? selectCity.value: '';
+    if (chosenCity === "Paris") reviews = data["paris"].reviews;
+    else if (chosenCity === "Las Vegas") reviews = data["las vegas"].reviews;
+    else if (chosenCity === "San Francisco") reviews = data["san francisco"].reviews;
+    else if (chosenCity === "Miami") reviews = data["miami"].reviews;
+    else if (chosenCity === "Cork") reviews = data["cork"].reviews;
+    else if (chosenCity === "Barcelona") reviews = data["barcelona"].reviews;
+
+    var reviewsListElement = document.getElementById("reviews-list");
+
+    if (reviews.length == 0) {
+        var reviewDiv = document.createElement('div');
+        reviewDiv.className = 'review';
+        reviewDiv.innerHTML = 'NO REVIEWS YET';
+        reviewsListElement.appendChild(reviewDiv);
+    } else {
+        reviews.forEach(function(review) {
+            var reviewDiv = document.createElement('div');
+            reviewDiv.className = 'review';
+            reviewDiv.innerHTML = review.review + '<br>-' + review.name;
+            reviewsListElement.appendChild(reviewDiv);
+        });
+    }
 }
 
 function closeReviews() {
     reviewsContainer.classList.remove("is-selected-reviews");
+    var reviewsListElement = document.getElementById("reviews-list");
+    while (reviewsListElement.firstChild) { 
+        reviewsListElement.firstChild.remove(); 
+    }
 }
 
 function loadOfflineJSON(callback) {
