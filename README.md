@@ -46,6 +46,27 @@ Two Liberty versions of the application are maintained on the following branches
   This branch shows what the application looks like after it has been modernized to Liberty **AND** upgraded to Java 21. Comparing this branch to main, you will notice all the changes described for the `liberty-java8` branch in addition to:
   - Code changes in some source files (to fix Java upgrade issues)
 
+## Version 2
+Version 2 of ModResorts contains extra migration issues that need to be addressed when modernizing to Liberty and when upgrading Java. Version 2 can be used for a more complete modernization demo.
+
+Version 2 exists in branches that represent the various stages of modernization:
+
+- `main-v2` 
+  This branch captures the application as a traditional WebSphere Application Server application built with and running on Java 8
+
+- `liberty-java8-v2`
+  This branch captures the application after it has been modernized to Liberty, but still built with and running on Java 8
+
+- `liberty-java21-v2`
+  This branch captures the final state of the application after it has been modernized to Liberty, and upgraded to use Java 21.
+
+In order to build and run Version 2 of the application, you need to install the dependencies in the `dependencies` directory to your local maven repository:
+
+```
+mvn install:install-file -Dfile=dependencies/env-config-1.5.jar -DpomFile=dependencies/env-config-1.5.pom
+mvn install:install-file -Dfile=dependencies/env-config-1.6.jar -DpomFile=dependencies/env-config-1.6.pom
+mvn install:install-file -Dfile=dependencies/env-config-1.7.jar -DpomFile=dependencies/env-config-1.7.pom
+```
 
 ## Deploying the Application to IBM WebSphere Application Server
 There are no special instructions for deploying the application to IBM WebSphere Application Server. There is no configuration required on the application server in order for the application to deploy and function.
