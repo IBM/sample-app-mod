@@ -3,6 +3,8 @@ package com.acme.modres;
 import com.acme.modres.db.ModResortsCustomerInformation;
 import com.acme.modres.exception.ExceptionHandler;
 import com.acme.modres.mbean.AppInfo;
+import com.acme.modres.util.ModResortsSecretData;
+import com.acme.modres.util.ModResortsUnsafeFieldAccessor;
 
 import java.io.BufferedReader;
 
@@ -49,7 +51,9 @@ public class WeatherServlet extends HttpServlet {
   // local OS environment variable key name. The key value should provide an API
   // key that will be used to
   // get weather information from site: http://www.wunderground.com
-  private static final String WEATHER_API_KEY = "WEATHER_API_KEY";
+  //private static final String WEATHER_API_KEY = "WEATHER_API_KEY";
+
+  private String weatherAPIKey;
 
   private static final Logger logger = Logger.getLogger(WeatherServlet.class.getName());
 
@@ -75,6 +79,14 @@ public class WeatherServlet extends HttpServlet {
     } catch (InstanceAlreadyExistsException | MBeanRegistrationException | NotCompliantMBeanException e) {
       e.printStackTrace();
     }
+
+    ModResortsSecretData secretData = new ModResortsSecretData();
+    try {
+      weatherAPIKey = ModResortsUnsafeFieldAccessor.getPrivateStringField(secretData, "secretApiKey");
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
     context = setInitialContextProps();
   }
 
@@ -106,7 +118,6 @@ public class WeatherServlet extends HttpServlet {
     String city = request.getParameter("selectedCity");
     logger.log(Level.FINE, "requested city is " + city);
 
-    String weatherAPIKey = System.getenv(WEATHER_API_KEY);
     String mockedKey = mockKey(weatherAPIKey);
     logger.log(Level.FINE, "weatherAPIKey is " + mockedKey);
 
