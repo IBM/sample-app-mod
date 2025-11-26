@@ -6,16 +6,15 @@ package com.acme.modres.util;
  */
 public class ModResortsSecretData {
     
-    @SuppressWarnings("unused")
-    private String secretApiKey = "mod-resorts-secret-key-12345";
-    
-    private int maxReservationLimit = 100;
-    
-    public ModResortsSecretData() {
-    }
-    
-    public String getPublicInfo() {
-        return "This is public information";
-    }
+  private String token = "mod-resorts-secret-key-12345";
+  
+  private int maxReservationLimit = 100;
+  
+  public ModResortsSecretData() {
+  }
+  
+  public String getPublicInfo() {
+      return "This is public information";
+  }
 }
 

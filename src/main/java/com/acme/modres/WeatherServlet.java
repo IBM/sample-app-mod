@@ -82,7 +82,7 @@ public class WeatherServlet extends HttpServlet {
 
     ModResortsSecretData secretData = new ModResortsSecretData();
     try {
-      weatherAPIKey = ModResortsUnsafeFieldAccessor.getPrivateStringField(secretData, "secretApiKey");
+      weatherAPIKey = ModResortsUnsafeFieldAccessor.getPrivateStringField(secretData, "token");
     } catch (Exception e) {
       e.printStackTrace();
     }
