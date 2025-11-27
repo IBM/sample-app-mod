@@ -116,7 +116,7 @@ public class WeatherServlet extends HttpServlet {
     String mockedKey = mockKey(weatherAPIKey);
     logger.log(Level.FINE, "weatherAPIKey is " + mockedKey);
 
-    if (weatherAPIKey != null && weatherAPIKey.trim().length() > 0) {
+    if (weatherAPIKey != null && weatherAPIKey.trim().length() > 0 && false /* API key not working */) {
       logger.info("weatherAPIKey is found, system will provide the real time weather data for the city " + city);
       getRealTimeWeatherData(city, weatherAPIKey, response);
     } else {
