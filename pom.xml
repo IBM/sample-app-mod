@@ -56,6 +56,13 @@
       <version>5.3.20</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.acme.common</groupId>
+      <artifactId>env-config</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/lib/env-config-1.0.jar</systemPath>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

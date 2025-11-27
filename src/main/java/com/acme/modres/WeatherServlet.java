@@ -3,7 +3,7 @@ package com.acme.modres;
 import com.acme.modres.db.ModResortsCustomerInformation;
 import com.acme.modres.exception.ExceptionHandler;
 import com.acme.modres.mbean.AppInfo;
-import com.acme.modres.util.ModResortsSecretData;
+import com.acme.common.ModResApiConnector;
 import com.acme.modres.util.ModResortsUnsafeFieldAccessor;
 
 import java.io.BufferedReader;
@@ -48,11 +48,6 @@ public class WeatherServlet extends HttpServlet {
   @Inject
   private ModResortsCustomerInformation customerInfo;
 
-  // local OS environment variable key name. The key value should provide an API
-  // key that will be used to
-  // get weather information from site: http://www.wunderground.com
-  //private static final String WEATHER_API_KEY = "WEATHER_API_KEY";
-
   private String weatherAPIKey;
 
   private static final Logger logger = Logger.getLogger(WeatherServlet.class.getName());
@@ -80,9 +75,9 @@ public class WeatherServlet extends HttpServlet {
       e.printStackTrace();
     }
 
-    ModResortsSecretData secretData = new ModResortsSecretData();
+    ModResApiConnector apiData = new ModResApiConnector();
     try {
-      weatherAPIKey = ModResortsUnsafeFieldAccessor.getPrivateStringField(secretData, "token");
+      weatherAPIKey = ModResortsUnsafeFieldAccessor.getPrivateStringField(apiData, "token");
     } catch (Exception e) {
       e.printStackTrace();
     }
