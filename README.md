@@ -90,7 +90,7 @@ mvn io.openliberty.tools:liberty-maven-plugin:3.10.2:dev
 ```
 - Build and drop the WAR file into Liberty installation.
 
-For more on Liberty Tools, refer to [Develop with Liberty Tools](https://openliberty.io/docs/latest/develop-liberty-tools.html)
+For more on Liberty Tools, see [Develop with Liberty Tools](https://openliberty.io/docs/latest/develop-liberty-tools.html)
 
 ## Building and Running the Application a Liberty Container
 A Containerfile exists in the `liberty-` branches. The Containerfile is produced by IBM Application Modernization Accelerator and is available in the [migration bundle](#migration-bundle). It can be used to build an image and run the application in a container. You can build the image as follows:
