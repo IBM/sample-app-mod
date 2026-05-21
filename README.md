@@ -73,7 +73,7 @@ mvn install:install-file -Dfile=dependencies/env-config-1.7.jar -DpomFile=depend
 There are no special instructions for deploying the application to IBM WebSphere Application Server. There is no configuration required on the application server in order for the application to deploy and function.
 
 It can be deployed using the UI console or using `wsadmin`.
-Refer to the [documentation](https://www.ibm.com/docs/en/was-nd/9.0.5?topic=applications-how-do-i-deploy) for more details on deploying the application to WebSphere Application Server.
+See the [documentation](https://www.ibm.com/docs/en/was-nd/9.0.5?topic=applications-how-do-i-deploy) for more details on deploying the application to WebSphere Application Server.
 
 
 
