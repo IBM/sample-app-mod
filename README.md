@@ -84,7 +84,7 @@ To deploy the application on Liberty you can do one of the following:
 ```
 mvn liberty:dev
 ```
-- Launch Liberty in dev mode directly from command line:
+- Start Liberty in dev mode directly from command line:
 ```
 mvn io.openliberty.tools:liberty-maven-plugin:3.10.2:dev
 ```
