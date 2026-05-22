@@ -38,7 +38,7 @@ Two Liberty versions of the application are maintained on the following branches
 - `liberty-java8`
   This branch shows what the application looks like after it has been modernized to Liberty. Comparing this branch to main, you will notice the following changes:
   - Code changes in some source files (to remove use of WAS APIs)
-  - Addition of the Liberty config file: `src/main/liberty/config/server.xml`. This file is produced by IBM Application Modernization Accelerator and is available in the [migration bundle](#migration-bundle)
+  - Addition of the Liberty config file: `src/main/liberty/config/server.xml`. This file is produced by IBM Application Modernization Accelerator and is available in the [migration plan](#migration-plan)
   - A `Containerfile` has also been added to the project root to allow you to build an image and run the application in a container.
   - [Liberty Maven Plugin](https://github.com/OpenLiberty/ci.maven) has been configured in the `pom.xml` for convenience of developing the application with Liberty. 
 
