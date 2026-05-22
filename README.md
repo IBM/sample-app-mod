@@ -106,4 +106,4 @@ docker run --rm -d -p 9080:9080 modresorts:latest
 ```
 
 ## Migration Plan
-The `migration_bundle` directory contains a migration bundle for ModResorts created by [IBM Application Modernization Accelerator](https://www.ibm.com/products/jsphere/tools) (AMA). It is used by IBM AMA Dev Tools (available for VS Code, Eclipse IDE, and IntelliJ IDEA) or IBM Bob to accelerate modernization of legacy enterprise Java applications to run on Liberty.  [Try](https://www.ibm.com/account/reg/us-en/signup?formid=urx-53705) AMA.
+The `migration_bundle` directory contains a migration plan for ModResorts created by [IBM Application Modernization Accelerator](https://www.ibm.com/products/jsphere/tools) (AMA). It is used by IBM AMA Dev Tools (available for VS Code, Eclipse IDE, and IntelliJ IDEA) or IBM Bob to accelerate modernization of legacy enterprise Java applications to run on Liberty.  [Try](https://www.ibm.com/account/reg/us-en/signup?formid=urx-53705) AMA.
