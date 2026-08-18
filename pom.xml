@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.acme.modres</groupId>
-  <artifactId>modresorts</artifactId>
+  <artifactId>sample-app-mod</artifactId>
   <version>2.0.0</version>
   <packaging>war</packaging>
   <name>ModResorts</name>
@@ -58,8 +58,8 @@
     </dependency>
     <dependency>
       <groupId>com.acme.common</groupId>
-      <artifactId>env-config</artifactId>
-      <version>1.5</version>
+      <artifactId>acme</artifactId>
+      <version>1.2</version>
     </dependency>
   </dependencies>
   <build>

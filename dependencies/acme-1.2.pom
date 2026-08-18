@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.acme.common</groupId>
-  <artifactId>env-config</artifactId>
-  <version>1.5</version>
+  <artifactId>acme</artifactId>
+  <version>1.2</version>
   <name>EnvConfig</name>
   <url>http://maven.apache.org</url>
   <dependencies>

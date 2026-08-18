@@ -249,16 +249,6 @@ public class WeatherServlet extends HttpServlet {
     return "*********" + lastToKeep;
   }
 
-  private String configureEnvDiscovery() {
-
-    String serverEnv = "";
-
-    serverEnv += com.ibm.websphere.runtime.ServerName.getDisplayName();
-    serverEnv += com.ibm.websphere.runtime.ServerName.getFullName();
-
-    return serverEnv;
-  }
-
   private InitialContext setInitialContextProps() {
 
     Hashtable ht = new Hashtable();
