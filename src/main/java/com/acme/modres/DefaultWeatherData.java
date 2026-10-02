@@ -45,13 +45,13 @@ public class DefaultWeatherData {
     } else if (Constants.LAS_VEGAS.equals(getCity())) {
       dataFileName = Constants.LAS_VEGAS_WEATHER_FILE;
     } else if (Constants.SAN_FRANCISCO.equals(getCity())) {
-      dataFileName = Constants.SAN_FRANCESCO_WEATHER_FILE;
+      dataFileName = Constants.SAN_FRANCISCO_WEATHER_FILE;
     } else if (Constants.MIAMI.equals(getCity())) {
       dataFileName = Constants.MIAMI_WEATHER_FILE;
     } else if (Constants.CORK.equals(getCity())) {
       dataFileName = Constants.CORK_WEATHER_FILE;
     } else if (Constants.BARCELONA.equals(getCity())) {
-      dataFileName = Constants.BACELONA_WEATHER_FILE;
+      dataFileName = Constants.BARCELONA_WEATHER_FILE;
     } else {
       throw new UnsupportedOperationException("The default weather information for the selected city: " + city +
           " is not provided.  Valid selections are: " + Constants.SUPPORTED_CITIES);
